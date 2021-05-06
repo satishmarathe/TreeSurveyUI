@@ -11,21 +11,21 @@ class SurveyListPage extends React.Component{
     constructor(props){
         super(props);
 
-        /** now declate state */
+        /** now declare state */
         this.state = {
             isLoaded: false,
-            /** we will getback an array of Energy Bills so we define a property to hold an array */
+            /** we will getback an array of Survey Details so we define a property to hold an array */
             energyBillsArray: []
             
         }
     }
 
-    /** we want to get list of energy bills when this page loads i.e. set some state when the page loads  
+    /** we want to get list of Survey Details when this page loads i.e. set some state when the page loads  
      *  The best place to do this is to use the lifecycle method : componentDidMount
      *  This method is called immediately after the component is mounted
     */
    componentDidMount(){
-       console.log("<<< inside componentDidMount >>>")
+       console.log("<<< inside componentDidMount of SurveyList Page >>>")
        /** this is the proper lifecycle method for making api calls
         *  the component MUST be mounted before the state is set
         *  since the component is mounted before this below api run is done we can set state here
@@ -44,7 +44,7 @@ class SurveyListPage extends React.Component{
            console.log(energyBillsResponseFromApi);
           **/
          /** define the endpoint to be called */
-        const baseUrl = process.env.REACT_APP_API_URL + "/energyBills/";
+        const baseUrl = process.env.REACT_APP_API_URL + "/api/v1/surveys";
         axios.get(baseUrl).then(({data}) => {
             //console.log(data);
             //console.log(JSON.stringify(data));
@@ -59,13 +59,13 @@ class SurveyListPage extends React.Component{
         //console.log(this.state.energyBillsArray) ;      
         return(
             <React.Fragment>
-            <h3>Survey List</h3>
+            <h3>Tree Survey List</h3>
             <table className="table">
                 <thead>
                     <tr>
-                        <th>Title</th>
-                        <th>Author ID</th>
-                        <th>Category</th>
+                        <th>Tree ID</th>
+                        <th>Species</th>
+                        <th>Experiment</th>
                     </tr>
                 </thead>
 
@@ -73,8 +73,8 @@ class SurveyListPage extends React.Component{
                     {this.state.energyBillsArray.map((energyBill) => {
                         //console.log(energyBill);
                         return (<tr>
-                            <td>{energyBill.id}</td>
-                            <td>{energyBill.vendor}</td>
+                            <td>{energyBill.treeId}</td>
+                            <td>{energyBill.species}</td>
                             <td>{energyBill.days}</td>
                         </tr>);
 
