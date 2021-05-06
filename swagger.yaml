@@ -1,41 +1,32 @@
 swagger: '2.0'
 info:
   description: >-
-    This is a sample server Petstore server.  You can find out more about    
-    Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net,
-    #swagger](http://swagger.io/irc/).      For this sample, you can use the api
-    key `special-key` to test the authorization     filters.
+    Describes various endpoints for Tree Survey.
   version: 1.0.0
-  title: Energy App
+  title: Tree Survey
   termsOfService: 'http://swagger.io/terms/'
   contact:
     email: apiteam@swagger.io
   license:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
-host: petstore.swagger.io
-basePath: /v2
+host: localhost:8080
+basePath: /api/v1
 tags:
-  - name: pet
-    description: Everything about your Energy Bills
-  - name: store
-    description: Access to Petstore orders
-  - name: user
-    description: Operations about user
-    externalDocs:
-      description: Find out more about our store
-      url: 'http://swagger.io'
+  - name: Tree Survey
+    description: An API to perform basic CRUD operations
+  
 schemes:
   - https
   - http
 paths:
-  /energy:
+  /surveys:
     get:
       tags:
-        - pet
-      summary: Get all of your energy bills
-      description: Gets all the energy bills till date
-      operationId: getAllEnergyBills
+        - Get all survey details
+      summary: Get all surveys with details
+      description: Retrieves all survey details
+      operationId: getSurveys
       produces:
         - application/json
       responses:
@@ -44,10 +35,10 @@ paths:
           schema:
             type: object
             properties:
-              energyBills:
+              surveyArray:
                 type: array            
                 items:
-                  $ref: '#/definitions/Energy'
+                  $ref: '#/definitions/Survey'
         '400':
           description: Invalid status value
       security:
@@ -68,42 +59,52 @@ securityDefinitions:
     name: api_key
     in: header
 definitions:
-  Energy:
+  Survey:
     type: object
     required:
       - name
       - photoUrls
     properties:
-      id:
+      treeId:
+        type: string
+        description: Unique identifier for each Tree
+      species:
+        type: string
+        description: Type or Family of Tree
+      experiment:
+        type: string
+        description: Nature of experiment conducted
+      site:
+        type: string
+        description: Location where experiment was carried out
+      surveyor:
+        type: string
+        description: Person who conducted this experiment
+      location:
+        type: string
+        description: Place of experiment
+      plantingDate:
+        type: string
+        description: Date of Plantation
+      inspectionDate:
+        type: string
+        description: Date of Inspection
+      typeOfTreatment:
+        type: string
+        description: Nature of treatment for the plant
+      healthScore:
         type: integer
         format: int64
-      vendor:
+        description: Rating regarding health of plant
+      pathogenFound:
         type: string
-        description: Vendor name
-      fromDate:
+        description: was any infection found ?
+      woodBorerFound:
         type: string
-        description: Bill Start Date
-      toDate:
+        description: were any wood borer bettle infections found ?
+      notes:
         type: string
-        description: Bill End Date
-      days:
-        type: string
-        description: Number of days
-      receivedDate:
-        type: string
-        description: Bill Received Date
-      dueDate:
-        type: string
-        description: Bill Due Date
-      paidDate:
-        type: string
-        description: Bill Payment Date
-      billAmount:
-        type: string
-        description: Bill Amount
-      comments:
-        type: string
-        description: Comments about the bill
+        description: Observations and comments go here
       
     xml:
       name: Pet
