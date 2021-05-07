@@ -2,6 +2,19 @@ import React from "react";
 import {getListOfEnergyBills} from "../api/energyBillsApi.js";
 import axios from "axios";
 
+/** define the table header as a constant and use it within  */
+const SurveyListTableHeader = () => {
+    return (
+        <thead>
+        <tr>
+            <th>Tree ID</th>
+            <th>Species</th>
+            <th>Experiment</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    )
+  }
 
 class SurveyListPage extends React.Component{
     /** we will store the api results in a state */
@@ -61,20 +74,16 @@ class SurveyListPage extends React.Component{
             <React.Fragment>
             <h3>Tree Survey List</h3>
             <table className="table">
-                <thead>
-                    <tr>
-                        <th>Tree ID</th>
-                        <th>Species</th>
-                        <th>Experiment</th>
-                    </tr>
-                </thead>
+
+                <SurveyListTableHeader />
 
                 <tbody>
-                    {this.state.energyBillsArray.map((energyBill) => {
+                    {this.state.energyBillsArray.map((energyBill,index) => {
                         //console.log(energyBill);
-                        return (<tr>
+                        return (<tr key={index}>
                             <td>{energyBill.treeId}</td>
                             <td>{energyBill.species}</td>
+                            <td>{energyBill.days}</td>
                             <td>{energyBill.days}</td>
                         </tr>);
 

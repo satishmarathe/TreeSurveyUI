@@ -39,5 +39,10 @@ The above means any requests to : "/energyBills" will get routed to >> "/api/v1/
 Thats it .
 Reference: https://shekhargulati.com/2019/07/10/how-to-setup-json-server-to-use-custom-id-and-route/
 
+#6
+Started passing 'Keys' or index for each row of array so that we can uniquely identify each row.
+This will become useful while editing a row or deleting .
+For more details refer : https://reactjs.org/docs/lists-and-keys.html#keys
+
 
 
