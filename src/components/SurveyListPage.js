@@ -104,9 +104,14 @@ class SurveyListPage extends React.Component{
          * so in below example we are extracting the property / attribute 'energyBillsArray' from the object : 'state' 
         */
         const { energyBillsArray } = this.state;
+
+        /** set state after removing the record we clicked on to delete  */
         this.setState({
             isLoaded: true,
-            energyBillsArray: energyBillsArray.filter((character, i) => { 
+            energyBillsArray: energyBillsArray.filter((surveyRecord, i) => { 
+                /** from all of the records find the record whose index matches with the record we want to delete */
+                /** the record for which the index matches needs to be removed from results , so we dont send it back */
+                /** we only return those records whose index is not the same as the record we chose to delete */
                 return i !== index;
             })
         });        

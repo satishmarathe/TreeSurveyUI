@@ -44,5 +44,31 @@ Started passing 'Keys' or index for each row of array so that we can uniquely id
 This will become useful while editing a row or deleting .
 For more details refer : https://reactjs.org/docs/lists-and-keys.html#keys
 
+#7
+Implemented delete functionality making use of the site: https://www.taniarascia.com/getting-started-with-react/
+
+First we added a button for each row :
+<td><button onClick={() => this.deleteSurveyRecord(index)}>Delete!</button></td>
+
+We defined an anonymous function for 'onClick' event.
+This anonymous function in turn calls a function 'deleteSurveyRecord'
+To this function we passed the 'index'
+
+This defined function is also an anonymous function:
+deleteSurveyRecord = (index) => {
+        /** destructuring **/
+        const { energyBillsArray } = this.state;
+
+        /** set state after removing the record we clicked on to delete  */
+        this.setState({
+            isLoaded: true,
+            energyBillsArray: energyBillsArray.filter((surveyRecord, i) => { 
+                return i !== index;
+            })
+        });        
+}
+
+
+
 
 
