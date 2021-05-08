@@ -68,7 +68,11 @@ deleteSurveyRecord = (index) => {
         });        
 }
 
+NOTE : a Good understanding of detructuring for syntax like :
+const { energyBillsArray } = this.state;
 
+is explained here :
+https://codeburst.io/a-simple-guide-to-destructuring-and-es6-spread-operator-e02212af5831
 
 
 
