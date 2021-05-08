@@ -1,4 +1,4 @@
-var getEnergyBillSchema = {
+var surveyDetailSchema = {
     "$id": "https://example.com/arrays.schema.json",
     "$schema": "http://json-schema.org/draft-07/schema#",
     "description": "A representation of a person, company, organization, or place",
@@ -74,4 +74,4 @@ var getEnergyBillSchema = {
     }
   };
 
-  module.exports = getEnergyBillSchema;
+  module.exports = surveyDetailSchema;

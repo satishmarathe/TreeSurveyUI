@@ -1,12 +1,11 @@
 var jsf = require("json-schema-faker");
-//var getEnergyBillSchema = require("../src/api/mockEnergyBillSchema.js");
-var getEnergyBillSchema = require("../src/api/mockSurveyListDataSchema.js");
+var dataFromSurveyDetailSchema = require("../src/api/mockSurveyListDataSchema.js");
 
 
 var fs = require("fs");
 var chalk = require("chalk");
 
-const json = JSON.stringify(jsf(getEnergyBillSchema));
+const json = JSON.stringify(jsf(dataFromSurveyDetailSchema));
 
 fs.writeFile("./src/api/db.json",json,function (err){
     if(err){
