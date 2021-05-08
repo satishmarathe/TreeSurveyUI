@@ -16,8 +16,6 @@ const SurveyListTableHeader = () => {
     )
   }
 
-
-
 class SurveyListPage extends React.Component{
 
     
@@ -32,7 +30,7 @@ class SurveyListPage extends React.Component{
         this.state = {
             isLoaded: false,
             /** we will getback an array of Survey Details so we define a property to hold an array */
-            energyBillsArray: []
+            surveyRecordsArray: []
             
         }
     }
@@ -66,13 +64,14 @@ class SurveyListPage extends React.Component{
             //console.log(data);
             //console.log(JSON.stringify(data));
             this.setState(
-                { energyBillsArray: data }
+                { surveyRecordsArray: data }
+                
            );            
         })
                    
    }
     render(){ 
-        console.log("@@@ inside render array is @@@",this.state.energyBillsArray)
+        console.log("@@@ inside render array is @@@",this.state.surveyRecordsArray)
         //console.log(this.state.energyBillsArray) ;      
         return(
             <React.Fragment>
@@ -82,11 +81,11 @@ class SurveyListPage extends React.Component{
                 <SurveyListTableHeader />
 
                 <tbody>
-                    {this.state.energyBillsArray.map((energyBill,index) => {
+                    {this.state.surveyRecordsArray.map((surveyRecord,index) => {
                         return (<tr key={index}>
-                            <td>{energyBill.treeId}</td>
-                            <td>{energyBill.species}</td>
-                            <td>{energyBill.days}</td>
+                            <td>{surveyRecord.treeId}</td>
+                            <td>{surveyRecord.species}</td>
+                            <td>{surveyRecord.days}</td>
                             <td><button onClick={() => this.deleteSurveyRecord(index)}>Delete!</button></td>
                            
                         </tr>);
@@ -103,12 +102,12 @@ class SurveyListPage extends React.Component{
          * here if we need to extract specific properties from an object we need to enclose that property within {}
          * so in below example we are extracting the property / attribute 'energyBillsArray' from the object : 'state' 
         */
-        const { energyBillsArray } = this.state;
+        const { surveyRecordsArray } = this.state;
 
         /** set state after removing the record we clicked on to delete  */
         this.setState({
             isLoaded: true,
-            energyBillsArray: energyBillsArray.filter((surveyRecord, i) => { 
+            surveyRecordsArray: surveyRecordsArray.filter((surveyRecord, i) => { 
                 /** from all of the records find the record whose index matches with the record we want to delete */
                 /** the record for which the index matches needs to be removed from results , so we dont send it back */
                 /** we only return those records whose index is not the same as the record we chose to delete */
