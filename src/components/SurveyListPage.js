@@ -16,7 +16,11 @@ const SurveyListTableHeader = () => {
     )
   }
 
+
+
 class SurveyListPage extends React.Component{
+
+    
     /** we will store the api results in a state */
     /** in class components state is initialised in constructor */
     /** constructor accepts 'props' as a parameter */
@@ -79,12 +83,12 @@ class SurveyListPage extends React.Component{
 
                 <tbody>
                     {this.state.energyBillsArray.map((energyBill,index) => {
-                        //console.log(energyBill);
                         return (<tr key={index}>
                             <td>{energyBill.treeId}</td>
                             <td>{energyBill.species}</td>
                             <td>{energyBill.days}</td>
-                            <td>{energyBill.days}</td>
+                            <td><button onClick={() => this.deleteSurveyRecord(index)}>Delete!</button></td>
+                           
                         </tr>);
 
                     })}
@@ -92,6 +96,20 @@ class SurveyListPage extends React.Component{
             </table>
             </React.Fragment>
         );
+    }    
+
+    deleteSurveyRecord = (index) => {
+        /** below is an example of 'destructuring'  
+         * here if we need to extract specific properties from an object we need to enclose that property within {}
+         * so in below example we are extracting the property / attribute 'energyBillsArray' from the object : 'state' 
+        */
+        const { energyBillsArray } = this.state;
+        this.setState({
+            isLoaded: true,
+            energyBillsArray: energyBillsArray.filter((character, i) => { 
+                return i !== index;
+            })
+        });        
     }
 }
 export default SurveyListPage;
