@@ -74,5 +74,9 @@ const { energyBillsArray } = this.state;
 is explained here :
 https://codeburst.io/a-simple-guide-to-destructuring-and-es6-spread-operator-e02212af5831
 
+#8
+Additional details of JSON Server:
+https://codingthesmartway.com/create-a-rest-api-with-json-server/
+
 
 
