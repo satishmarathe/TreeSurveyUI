@@ -86,5 +86,20 @@ surveyRecordsArray[2].id
 
 here we are attempting to extract the 'id' of the 'third' element in the array 
 
+#10
+We needed to make a call to backend to delete a specific record.
+Whenever we made a DELETE call to : http://localhost:9090/api/v1/surveys/123 it would return 404 
+( here assuming 123 is the id of record ) 
+when we changed this to make a DELETE call to : http://localhost:9090/surveyRecords/123 it worked ! 
+
+This meant we need to add a route for this to support our call .
+So we added the following route:
+"/api/v1/surveys/:id": "/surveyRecords/:id"
+
+Note:
+Notice how we provide path param as ':id' 
+Reference:
+https://shekhargulati.com/2019/07/10/how-to-setup-json-server-to-use-custom-id-and-route/
+
 
 
