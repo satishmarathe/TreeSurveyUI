@@ -104,6 +104,20 @@ class SurveyListPage extends React.Component{
         */
         const { surveyRecordsArray } = this.state;
 
+        /** lets first try and delete from JSON Server , later we will switch to actual Spring boot endpoint */
+        const baseUrl = process.env.REACT_APP_API_URL + "/api/v1/surveys/" + surveyRecordsArray[index].id;
+        //const baseUrl = process.env.REACT_APP_API_URL + "/surveyRecords/" + surveyRecordsArray[index].id;
+        
+        console.log(baseUrl)
+
+        axios.delete(baseUrl)
+        .then(data => {
+            console.log(data)
+        }).catch(error => {
+            console.log(error);
+        });  
+        
+        
         /** set state after removing the record we clicked on to delete  */
         this.setState({
             isLoaded: true,
