@@ -1,3 +1,4 @@
 {
-    "/api/v1/surveys": "/surveyRecords"
+    "/api/v1/surveys": "/surveyRecords",
+    "/api/v1/surveys/:id": "/surveyRecords/:id"
 }
