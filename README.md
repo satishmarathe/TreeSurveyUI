@@ -101,5 +101,21 @@ Notice how we provide path param as ':id'
 Reference:
 https://shekhargulati.com/2019/07/10/how-to-setup-json-server-to-use-custom-id-and-route/
 
+#11
+We thought that JSON Server will support routes specific to the type: /api/v1/surveys/:id"
+So we thought that our JSON object MUST have an attribute : 'id'
+As a result we had changed our json data from 'treeId' to 'id'
+
+However this is not required ! 
+By passing a parameter to JSON server as startup we can tell it which attribute should be treated as 'id' !
+Ex:
+( in package.json ) >> 
+"scripts": {
+    ...
+    "start-mockapi": "json-server --watch src/api/db.json --id treeId --routes src/api/routes.json --port 9090"    ,
+    ...
+  }
+Notice we are passing --id treeId which tells json server to treat 'treeId' as the 'id' field
+
 
 
