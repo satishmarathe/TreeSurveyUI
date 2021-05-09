@@ -9,7 +9,7 @@ npm run dev
 This will start the react app and also start the mock server to serve up fake responses to be consumed by UI !
 
 #3
-Mock fake response is served at following URL : http://localhost:3001/energyBills
+Mock fake response is served at following URL : http://localhost:3001/surveyRecords
 
 #4
 Using faker we can define our response schema in file : /src/api/mockSurveyListDataSchema.js
@@ -17,7 +17,7 @@ In this file we can define the format for date fields .
 Though datatype is string , we can define 'format' which will determine the format in which fake data will be generated
 
 #5
-The mocked response was available at: http://localhost:3001/energyBills
+The mocked response was available at: http://localhost:3001/surveyRecords
 The spring boot api was exposed at:   http://localhost:9090/api/v1/surveys
 
 So we needed mocked api to mimic spring boot endpoint.
@@ -31,10 +31,10 @@ Here we have added "--routes" with reference to a file "src/api/routes.json"
 This is a new file added by us .
 In this file we simply define the mapping :
 {
-    "/api/v1/surveys": "/energyBills"
+    "/api/v1/surveys": "/surveyRecords"
 }
 
-The above means any requests to : "/energyBills" will get routed to >> "/api/v1/surveys"
+The above means any requests to : "/surveyRecords" will get routed to >> "/api/v1/surveys"
 
 Thats it .
 Reference: https://shekhargulati.com/2019/07/10/how-to-setup-json-server-to-use-custom-id-and-route/
@@ -57,19 +57,19 @@ To this function we passed the 'index'
 This defined function is also an anonymous function:
 deleteSurveyRecord = (index) => {
         /** destructuring **/
-        const { energyBillsArray } = this.state;
+        const { surveyRecordsArray } = this.state;
 
         /** set state after removing the record we clicked on to delete  */
         this.setState({
             isLoaded: true,
-            energyBillsArray: energyBillsArray.filter((surveyRecord, i) => { 
+            surveyRecordsArray: surveyRecordsArray.filter((surveyRecord, i) => { 
                 return i !== index;
             })
         });        
 }
 
 NOTE : a Good understanding of detructuring for syntax like :
-const { energyBillsArray } = this.state;
+const { surveyRecordsArray } = this.state;
 
 is explained here :
 https://codeburst.io/a-simple-guide-to-destructuring-and-es6-spread-operator-e02212af5831
