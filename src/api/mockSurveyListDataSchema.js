@@ -4,7 +4,7 @@ var surveyDetailSchema = {
     "description": "A representation of a person, company, organization, or place",
     "type": "object",
     "properties": {
-      "energyBills": {
+      "surveyRecords": {
         "type": "array",
         "items": { "$ref": "#/definitions/Survey" }
       }
