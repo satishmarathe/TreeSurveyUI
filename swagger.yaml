@@ -65,7 +65,7 @@ definitions:
       - name
       - photoUrls
     properties:
-      treeId:
+      id:
         type: string
         description: Unique identifier for each Tree
       species:

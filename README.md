@@ -59,6 +59,7 @@ deleteSurveyRecord = (index) => {
         /** destructuring **/
         const { surveyRecordsArray } = this.state;
 
+
         /** set state after removing the record we clicked on to delete  */
         this.setState({
             isLoaded: true,
@@ -77,6 +78,13 @@ https://codeburst.io/a-simple-guide-to-destructuring-and-es6-spread-operator-e02
 #8
 Additional details of JSON Server:
 https://codingthesmartway.com/create-a-rest-api-with-json-server/
+
+#9
+extracting an element from an array based on index position :
+Example:
+surveyRecordsArray[2].id
+
+here we are attempting to extract the 'id' of the 'third' element in the array 
 
 
 

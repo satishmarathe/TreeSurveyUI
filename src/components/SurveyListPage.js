@@ -83,7 +83,7 @@ class SurveyListPage extends React.Component{
                 <tbody>
                     {this.state.surveyRecordsArray.map((surveyRecord,index) => {
                         return (<tr key={index}>
-                            <td>{surveyRecord.treeId}</td>
+                            <td>{surveyRecord.id}</td>
                             <td>{surveyRecord.species}</td>
                             <td>{surveyRecord.days}</td>
                             <td><button onClick={() => this.deleteSurveyRecord(index)}>Delete!</button></td>

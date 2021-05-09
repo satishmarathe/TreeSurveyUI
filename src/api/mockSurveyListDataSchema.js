@@ -12,10 +12,10 @@ var surveyDetailSchema = {
     "definitions": {
       "Survey": {
         "type": "object",
-        "required": [ "treeId", "species","experiment","site","by","location","plantDate","inspectionDate","treatment",
+        "required": [ "id", "species","experiment","site","by","location","plantDate","inspectionDate","treatment",
         "healthScore","pathogenFound","woodBorerFound","notes" ],
         "properties": {
-          "treeId": {
+          "id": {
             "type": "string",
             "description": "Unique identifier of each Tree."
           },
