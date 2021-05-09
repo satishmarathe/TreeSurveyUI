@@ -83,7 +83,7 @@ class SurveyListPage extends React.Component{
                 <tbody>
                     {this.state.surveyRecordsArray.map((surveyRecord,index) => {
                         return (<tr key={index}>
-                            <td>{surveyRecord.id}</td>
+                            <td>{surveyRecord.treeId}</td>
                             <td>{surveyRecord.species}</td>
                             <td>{surveyRecord.days}</td>
                             <td><button onClick={() => this.deleteSurveyRecord(index)}>Delete!</button></td>
@@ -105,7 +105,7 @@ class SurveyListPage extends React.Component{
         const { surveyRecordsArray } = this.state;
 
         /** lets first try and delete from JSON Server , later we will switch to actual Spring boot endpoint */
-        const baseUrl = process.env.REACT_APP_API_URL + "/api/v1/surveys/" + surveyRecordsArray[index].id;
+        const baseUrl = process.env.REACT_APP_API_URL + "/api/v1/surveys/" + surveyRecordsArray[index].treeId;
         //const baseUrl = process.env.REACT_APP_API_URL + "/surveyRecords/" + surveyRecordsArray[index].id;
         
         console.log(baseUrl)
