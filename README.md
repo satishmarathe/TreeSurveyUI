@@ -117,5 +117,8 @@ Ex:
   }
 Notice we are passing --id treeId which tells json server to treat 'treeId' as the 'id' field
 
+Reference:
+https://shekhargulati.com/2019/07/10/how-to-setup-json-server-to-use-custom-id-and-route/
+
 
 
