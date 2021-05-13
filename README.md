@@ -134,5 +134,21 @@ How we pass values for 'props' from parent component to child component.
 How 'callBack' functions ate passed to child component and how child component
 makes a call to 'callBack' which invokes function in parent !
 
+#15
+Calling POST from axios needs to ensure that we pass the payload.
+Passing payload is a little different in JavaScript
+Reference : https://blog.logrocket.com/how-to-make-http-requests-like-a-pro-with-axios/#axiospost
+This site provided good examples .
+We did it this way :
+
+```javascript
+axios.post(baseUrl,{
+                            "treeId": surveyRecord.treeId,
+                            "species": surveyRecord.species,
+                            "experiment": surveyRecord.days
+                        })
+        .then(data => {
+```
+
 
 

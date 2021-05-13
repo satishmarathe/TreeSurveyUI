@@ -112,7 +112,23 @@ class SurveyListPage extends React.Component{
         );
         
         /** next step is to make a call to REST API to save in backend */
-        console.log("<<<<< call to REST API to ADD Survey record goes here >>>>>>>>>>")
+        console.log("<<<<< call to REST API to ADD Survey record goes here >>>>>>>>>>");
+        /** lets first try and delete from JSON Server , later we will switch to actual Spring boot endpoint */
+        //const baseUrl = process.env.REACT_APP_API_URL + "/api/v1/surveys/" + surveyRecord.treeId;
+        const baseUrl = process.env.REACT_APP_API_URL + "/api/v1/surveys";
+        
+        console.log(baseUrl)
+
+        axios.post(baseUrl,{
+                            "treeId": surveyRecord.treeId,
+                            "species": surveyRecord.species,
+                            "experiment": surveyRecord.days
+                        })
+        .then(data => {
+            console.log(data)
+        }).catch(error => {
+            console.log(error);
+        });  
     }
 
     deleteSurveyRecord = (index) => {
