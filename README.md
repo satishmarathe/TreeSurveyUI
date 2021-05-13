@@ -128,5 +128,11 @@ Use the function :  Array.isArray(variable)
 how do we find the datatype in js ?
 Use the function : typeof <var_name>
 
+#14
+Placeholder to explain usage of ParentComponent and calling ChildComponent
+How we pass values for 'props' from parent component to child component.
+How 'callBack' functions ate passed to child component and how child component
+makes a call to 'callBack' which invokes function in parent !
+
 
 
