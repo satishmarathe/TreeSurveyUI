@@ -120,5 +120,13 @@ Notice we are passing --id treeId which tells json server to treat 'treeId' as t
 Reference:
 https://shekhargulati.com/2019/07/10/how-to-setup-json-server-to-use-custom-id-and-route/
 
+#12
+how do we check if the 'type' is an array ?
+Use the function :  Array.isArray(variable)
+
+#13
+how do we find the datatype in js ?
+Use the function : typeof <var_name>
+
 
 
