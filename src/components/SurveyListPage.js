@@ -1,6 +1,7 @@
 import React from "react";
 import {getListOfEnergyBills} from "../api/energyBillsApi.js";
 import axios from "axios";
+import SurveyAdd from "./SurveyAdd.js";
 
 /** define the table header as a constant and use it within  */
 const SurveyListTableHeader = () => {
@@ -93,9 +94,26 @@ class SurveyListPage extends React.Component{
                     })}
                 </tbody>
             </table>
+
+            {/* lets call the child component and pass to its 'props' a call back function to call ! */}
+            <SurveyAdd  onSubmitAddSurveyCallback={this.onSubmitAddSurveyCallback}/>
             </React.Fragment>
         );
     }    
+
+    onSubmitAddSurveyCallback = (surveyRecord) => {
+        console.log("<<<<<< am I getting called ? >>>>>> ")
+        /** once on the UI we have added a survey we need to update the state  */
+        this.setState(
+                        {
+                            surveyRecordsArray: [...this.state.surveyRecordsArray, surveyRecord],
+                            isLoaded: true
+                        }
+        );
+        
+        /** next step is to make a call to REST API to save in backend */
+        console.log("<<<<< call to REST API to ADD Survey record goes here >>>>>>>>>>")
+    }
 
     deleteSurveyRecord = (index) => {
         /** below is an example of 'destructuring'  
