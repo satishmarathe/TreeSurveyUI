@@ -2,6 +2,8 @@ import React from "react";
 import {getListOfEnergyBills} from "../api/energyBillsApi.js";
 import axios from "axios";
 import SurveyAdd from "./SurveyAdd.js";
+import SampleForm from "./SampleForm.js";
+
 
 /** define the table header as a constant and use it within  */
 const SurveyListTableHeader = () => {
@@ -10,7 +12,13 @@ const SurveyListTableHeader = () => {
         <tr>
             <th>Tree ID</th>
             <th>Species</th>
-            <th>Experiment</th>
+            <th>Treatment</th>
+            <th>Location</th>
+            <th>Planting Date</th>
+            <th>Inspection Date</th>
+            <th>Health Score</th>
+            <th>Pathogen Count</th>
+            <th>Woodborer Count</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -75,7 +83,7 @@ class SurveyListPage extends React.Component{
         console.log("@@@ inside render array is @@@",this.state.surveyRecordsArray)
         //console.log(this.state.energyBillsArray) ;      
         return(
-            <React.Fragment>
+            <React.Fragment>            
             <h3>Tree Survey List</h3>
             <table className="table">
 
@@ -86,9 +94,20 @@ class SurveyListPage extends React.Component{
                         return (<tr key={index}>
                             <td>{surveyRecord.treeId}</td>
                             <td>{surveyRecord.species}</td>
-                            <td>{surveyRecord.days}</td>
+                            <td>{surveyRecord.treatment}</td>
+                            <td>{surveyRecord.location}</td>
+                            <td>{surveyRecord.plantDate}</td>
+                            <td>{surveyRecord.inspectionDate}</td>
+                            <td>{surveyRecord.healthScore}</td>
+                            <td>{surveyRecord.pathogenFound}</td>
+                            <td>{surveyRecord.woodBorerFound}</td>
                             <td><button onClick={() => this.deleteSurveyRecord(index)}>Delete!</button></td>
                            
+            
+            
+            
+            
+            
                         </tr>);
 
                     })}
@@ -96,8 +115,12 @@ class SurveyListPage extends React.Component{
             </table>
 
             {/* lets call the child component and pass to its 'props' a call back function to call ! */}
-            <SurveyAdd  onSubmitAddSurveyCallback={this.onSubmitAddSurveyCallback}/>
-            </React.Fragment>
+            { /*<SurveyAdd  onSubmitAddSurveyCallback={this.onSubmitAddSurveyCallback}/> */ }
+            <div id="surveyAddDiv">
+            <SampleForm onSubmitAddSurveyCallback={this.onSubmitAddSurveyCallback} />
+            </div>
+            </React.Fragment>           
+            
         );
     }    
 
@@ -122,7 +145,16 @@ class SurveyListPage extends React.Component{
         axios.post(baseUrl,{
                             "treeId": surveyRecord.treeId,
                             "species": surveyRecord.species,
-                            "experiment": surveyRecord.days
+                            "experiment": surveyRecord.experiment,
+                            "site": surveyRecord.site,
+                            "location": surveyRecord.location,
+                            "plantDate":surveyRecord.plantDate,                           
+                            "inspectionDate": surveyRecord.inspectionDate,
+                            "treatment": surveyRecord.treatment,
+                            "healthScore": surveyRecord.healthScore,
+                            "pathogenFound": surveyRecord.pathogenFound,
+                            "woodBorerFound": surveyRecord.woodBorerFound,
+                            "notes": surveyRecord.notes
                         })
         .then(data => {
             console.log(data)
