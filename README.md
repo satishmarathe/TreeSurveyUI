@@ -149,6 +149,21 @@ axios.post(baseUrl,{
                         })
         .then(data => {
 ```
+#16
+Data entry form  is being done via:
+https://react-bootstrap.netlify.app/components/alerts/
 
+#17
+Using react-bootstrap we are adding text box with following syntax:
+```reactjs
+<Form.Control id="inlineFormInputName" placeholder="tree Id" onChange={this.handleChange} />
+```
+
+To ensure we can capture the value entered in this text box we need to add the attribute : 'name=treeId'
+```reactjs
+<Form.Control id="treeId" name="treeId" placeholder="tree Id" onChange={this.handleChange} />
+```
+
+By doing this the 'onChange' is able to identify which element has changed and capture the change in state !
 
 
