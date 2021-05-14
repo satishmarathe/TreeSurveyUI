@@ -3,6 +3,7 @@ import AboutPage from "./AboutPage.js";
 import HomePage from "./HomePage.js";
 import SurveyListPage from "./SurveyListPage.js";
 import Header from "../common/Header.js";
+import Container from 'react-bootstrap/Container';
 
 function App(){
     function getPage(){
@@ -18,10 +19,10 @@ function App(){
     }
             
     return(
-        <React.Fragment>
+        <Container>
             <Header/>
             {getPage()}
-        </React.Fragment>
+        </Container>
     );  
 }
 
