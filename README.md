@@ -155,15 +155,268 @@ https://react-bootstrap.netlify.app/components/alerts/
 
 #17
 Using react-bootstrap we are adding text box with following syntax:
-```reactjs
+```html
 <Form.Control id="inlineFormInputName" placeholder="tree Id" onChange={this.handleChange} />
 ```
 
 To ensure we can capture the value entered in this text box we need to add the attribute : 'name=treeId'
-```reactjs
+```html
 <Form.Control id="treeId" name="treeId" placeholder="tree Id" onChange={this.handleChange} />
 ```
 
 By doing this the 'onChange' is able to identify which element has changed and capture the change in state !
 
+#18
+Using react bootstrap to develop forms :
+https://dev.to/alecgrey/controlled-forms-with-front-and-backend-validations-using-react-bootstrap-5a2
+
+#19
+How do we remove a property from a Javascript object ?
+We can use the syntax:
+```javascript
+delete this.state.age
+```
+
+#20 
+what is the double !! mark used in code ?
+```javascript
+if ( !!this.state.errors[name] ){
+```
+Single exclamation means 'NOT' operator and all we are doing here is we are using it twice
+so what we are checking is : if the 'errors' object has an attribute represented by 'name'
+i.e. if not null or empty
+
+#21
+Using Forms , CSS , validations ......
+
+##21.1
+To use forms we have used : reactbootstrap and imported its form rich components like : 
+Form , Row , Col , FormControl , Dropdown , Inputgroup etc
+
+##21.2
+This is a very rich library which we can use for various purposes like :
+
+```html
+<Form.Control type="date" id="plantDate" name="plantDate" placeholder="date of plantation : mm/dd/yyyy" onChange={this.handleChange} />
+```
+In above example we are defining an input field which will provide us a calendar 
+So it will behave like a datepicker.
+This is being achieved by specifying the attribute:
+```html
+<Form.Control type="date"
+```
+
+Another example is where we are defining an input field which will only allow numbers to be entered 
+
+```html
+<Form.Control type="number" id="healthScore" name="healthScore" placeholder="Health Score" 
+onChange={this.handleChange} />
+```
+
+This is being achieved by specifying the attribute:
+```html
+<Form.Control type="number"
+```
+
+Another example is where we are defining an input field which will be a text area: 
+
+```html
+<Form.Control as='textarea' id="notes" name="notes" onChange={this.handleChange} />  
+```
+
+This is being achieved by specifying the attribute:
+```html
+<Form.Control as='textarea'
+```
+
+#21.3
+We have also added a css file as a js file : 'style.js'
+```javascript
+const style = {
+    signUpForm: {
+      border:'2px solid #000000'
+    }
+  }  
+  module.exports = style;
+```
+Here we are defining a variable 'style' which holds a javascript object : 'signupForm'
+This object has a property / attribute called 'border' which is holding a value 
+So this javascript object is actually holding 'css like' properties 
+
+Next step is to make use of these 'css like' properties:
+We do this in our <Div> which contains the <Form> ( where we want to apply css):
+```html
+<div style={signUpForm}>
+```
+More details explained in below reference:
+https://stackoverflow.com/questions/45348146/how-to-draw-a-border-around-a-bootstrap-form-in-reactjs
+
+#21.4
+Form Validations - this bit caused a lot of grief 
+This reference article was a saviour:
+https://dev.to/alecgrey/controlled-forms-with-front-and-backend-validations-using-react-bootstrap-5a2
+
+Almost all of our logic is based on above reference
+Lets dive in ...
+#21.4.1 
+Checking for errors on submit. So when we hit the submit button we need the user entered data to be validated.
+As an example:
+```javascript
+const newErrors = {}
+      if ( !this.state.treeId || this.state.treeId === '' ){
+        newErrors.treeId = 'cannot be blank!';
+      } 
+```
+Above we have a simple validation check : the 'treeId' field should not be blank or empty
+if it is null or empty we are populating a javascript object: 'newErrors'
+We populate it with a property and value with the syntax:
+```javascript
+newErrors.treeId = 'cannot be blank!';
+```
+here the property is : 'treeId'
+its value is : 'cannot be blank!'
+
+#21.4.2
+We now need to check if we have any validation errors :
+```javascript
+if ( Object.keys(newErrors).length > 0 ) {
+        this.setState(
+          {             
+            errors: newErrors
+          });
+      } else {
+        this.props.onSubmitAddSurveyCallback(this.state);
+        /** reset state for all attributes  */
+        this.setState({"treeId": '',"species":''});
+      } 
+```
+First we check if the js object 'newErrors' is empty or not.
+If not empty it means we have validation errors.
+In case of validation errors:
+We populate 'state's errors' object  with our errors object:
+NOTE:
+our newErrors object is populated with validation errors and they are now available in 'state'
+```javascript
+        this.setState(
+          {             
+            errors: newErrors
+          });
+```
+So if there are validation errrors we populate state with errors and do NOT allow form to be submitted to backend.
+
+#21.4.3
+Second if the js object 'newErrors' is empty or null:
+This means there are no validation errors 
+So we are good to try and submit the form to backend 
+
+```javascript
+else {
+    this.props.onSubmitAddSurveyCallback(this.state);
+    /** reset state for all attributes  */
+    this.setState({"treeId": '',"species":''});
+}
+```
+
+so above we are making call to call back function that this component received from Parent component 
+the function is : 'onSubmitAddSurveyCallback' and since the parent passed it to child component
+we know this is possible by passing it in 'props'
+this is why we call it this way:
+
+```javascript
+this.props.onSubmitAddSurveyCallback(this.state);
+```
+
+Also important point to note is we are passing our data entry forms values by passing 'this.state'
+So then it is the parent form's duty to call backend and populate the listing records to display
+newly added record.
+
+#21.4.4
+Next - if successful then after submitting data we need to ensure that the data entry fields ( text box , dropdowns)
+are cleaned up and dont hold on to earlier entered data .
+To achieve this :
+
+```javascript
+/** reset state for all attributes  */
+        this.setState({"treeId": '',"species":''});
+```
+
+Here we are calling 'setState' and setting individual attributes such as 'treeId' 'species' to null / empty values.
+NOTE:
+using the above technique we can change the state of individual attributes of state without disturbing other attributes.
+
+NOTE:
+in above example we have only shown two attributes being reset , but we will need to reset the values for all other
+state attributes ( whichever we want to reinitialise )
+
+However this alone will not reset the UI data entry fields with null / empty values.
+We need to do an additional tweak :
+
+```html
+<Form.Control  type="text" id="treeId" name="treeId" value={this.state.treeId} placeholder="tree Id" onChange={this.handleChange} 
+              isInvalid={ !!this.state.errors.treeId } />
+```
+
+Here the tweak is the addition of :
+```html
+<Form.Control  value={this.state.treeId}  />
+```
+
+what this will do is set this UI field with its value from 'state'
+Since in earlier step on form submit we set the value of this property in 'state' to empty / null value 
+now this field on UI will show null / empty value ! 
+Exactly what we want :)
+NOTE :
+whenever we change state , react will trigger call to 'render' which is helping the reset to null / empty.
+
+#21.4.5
+Displaying errors on UI fields
+This is the place where 'React bootstrap' comes into action !
+For each of the UI Form data entry fields which we want to validate and show errors , we add following attributes:
+( abbreviated below to only display relevant attributes )
+
+```html
+<Form.Control  type="text"  isInvalid={ !!this.state.errors.treeId } />
+<Form.Control.Feedback type='invalid'> { this.state.errors.treeId } </Form.Control.Feedback>
+```
+what we are doing is defining an attribute to this <Form.Control> called : isInvalid
+To this attribute we are assigning a javascript object
+The value of this attribute 'isInvalid' will be true when the 'errors' object has a attribute called 'treeId'
+The value of this attribute 'isInvalid' will be false when the 'errors' object does NOT have an attribute called 'treeId'
+
+Next - we have added : <Form.Control.Feedback type='invalid'>
+This is a feature of 'React bootstrap' by means of which if there are validation errors ( isInvalid = true )
+then that field will show up in red and also show the validation error message 
+Note that the error message is extracted as follows:
+```javascript
+{ this.state.errors.treeId }
+```
+so here from state we retrieve the 'errors' object and from it we are extracting value of the property 'treeId'.
+
+#21.4.6
+The final bit is where after the error is displayed ( in red and with error message ) :
+we want this error details to disappear as we start correcting the value.
+To do this :
+```javascript
+handleChange = event => {
+    ...
+    ...
+    /** check if the errors js object has any property represented by 'name' */
+    /** here due to javascript majic 'name' represents any of the various data entry fields we have */
+    /** as an example name = treeId if there was a validation error for treeid field */
+    /** this would mean the errors js object will have a property called 'treeId' */
+    
+    /** in below if condition we are using !! which is two not conditions   */
+    /** so all we are trying to check is whether the 'errors' js object has a property 'name' ( 'name' could be 'treeId') */
+    /** if it has such a property enter the if condition and clear off the property */
+    if ( !!this.state.errors[name] ){
+        //this.setState({...this.state.errors,[name] : value});
+
+        /** here we are deleting from errors js object property represented by 'name'  */
+        /** as states above 'name' is a placeholder and it will denote different form fields when they change */
+        delete this.state.errors[name];
+    }
+  }
+  ```
+In above comments is explained what we are doing .
+TLDR : we remove the error specific to the field in question from state.
 
