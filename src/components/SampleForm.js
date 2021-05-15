@@ -69,10 +69,45 @@ handleChange = event => {
     onFormSubmit = () => {
       /** satish test start */
       const newErrors = {}
+
       if ( !this.state.treeId || this.state.treeId === '' ){
-        newErrors.treeId = 'cannot be blank!';
-        console.log("<<<<< we have some errors >>>>>>")
+        newErrors.treeId = 'TreeId cannot be blank';        
       } 
+
+      if ( !this.state.species || this.state.species === '' ){
+        newErrors.species = 'Species needs to be selected';        
+      } 
+
+      if ( !this.state.treatment || this.state.treatment === '' ){
+        newErrors.treatment = 'Treatment needs to be selected';        
+      } 
+
+      if ( !this.state.location || this.state.location === '' ){
+        newErrors.location = 'Location needs to be selected';        
+      }
+      
+      if ( !this.state.plantDate || this.state.plantDate === '' ){
+        newErrors.plantDate = 'Date of Plantation needs to be selected';        
+      }
+
+      console.log("inspectionDate = " + this.state.inspectionDate);
+      console.log("plantDate = " + this.state.plantDate);
+
+      if ( this.state.inspectionDate && this.state.plantDate ){
+        
+          console.log("<<<<<< 2 >>>>>>>");
+          /** plantDate is not null or empty  */
+          /** check to ensure inspectionDate >=  plantDate */
+          var dateInspection = new Date(this.state.inspectionDate);
+          var datePlant = new Date(this.state.plantDate);
+          if(dateInspection < datePlant){
+            console.log("<<<<<< 3 >>>>>>>");
+            /** inspection date cannot be less than plantation date ! */
+            newErrors.inspectionDate = 'Inspection Date must be greater than Plantation Date';
+          }
+        
+      }
+      
       
       if ( Object.keys(newErrors).length > 0 ) {
         // We got errors!
@@ -88,7 +123,9 @@ handleChange = event => {
         //this.setState(this.initialState);
 
         /** reset state for all attributes  */
-        this.setState({"treeId": '',"species":''});
+        this.setState({"treeId": '',"species":'',"location": '',"plantDate": '',"inspectionDate": '',
+                      "treatment": '',"healthScore": '',"pathogenFound": '',"woodBorerFound": '',
+                      "notes": ''});
       }      
     }
 
@@ -120,7 +157,8 @@ handleChange = event => {
                 className="mr-sm-2"
                 id="species"
                 name="species"
-                onChange={this.handleChange}
+                value={this.state.species}
+                onChange={this.handleChange} isInvalid={ !!this.state.errors.species }
                 custom
               >
                 <option value="">Species...</option>
@@ -128,25 +166,32 @@ handleChange = event => {
                 <option value="Chapha">Chapha</option>
                 <option value="Tagar">Tagar</option>
               </Form.Control>
+              <Form.Control.Feedback type='invalid'>
+              { this.state.errors.species }
+              </Form.Control.Feedback>
             </Col>
             
             <Col xs="auto" className="my-1">
               <Form.Label className="mr-sm-2" htmlFor="inlineFormCustomSelect" srOnly>
-                Preference
+                Location
               </Form.Label>
               <Form.Control
                 as="select"
                 className="mr-sm-2"
                 id="location"
                 name="location"
-                onChange={this.handleChange}
+                value={this.state.location}
+                onChange={this.handleChange} isInvalid={ !!this.state.errors.location }
                 custom
               >
-                <option value="0">Location...</option>
+                <option value="">Location...</option>
                 <option value="China">China</option>
                 <option value="South Africa">South Africa</option>
-                <option value="India">India</option>
+                <option value="India">India</option>                
               </Form.Control>
+              <Form.Control.Feedback type='invalid'>
+                  { this.state.errors.location }
+              </Form.Control.Feedback>
             </Col>
             <Col xs="auto" className="my-1">
               
@@ -158,14 +203,22 @@ handleChange = event => {
               <Form.Label htmlFor="inlineFormInputName" srOnly>
                 plantDate
               </Form.Label>
-              <Form.Control type="date" id="plantDate" name="plantDate" placeholder="date of plantation : mm/dd/yyyy" onChange={this.handleChange} />
+              <Form.Control type="date" id="plantDate" name="plantDate" value={this.state.plantDate} placeholder="date of plantation : mm/dd/yyyy" 
+                isInvalid={ !!this.state.errors.plantDate } onChange={this.handleChange} />
+                <Form.Control.Feedback type='invalid'>
+              { this.state.errors.plantDate }
+              </Form.Control.Feedback>
             </Col>
             
             <Col sm={3} className="my-1">
               <Form.Label htmlFor="inlineFormInputName" srOnly>
                 inspectionDate
               </Form.Label>
-              <Form.Control type="date" id="inspectionDate" name="inspectionDate" placeholder="date of Inspection : mm/dd/yyyy" onChange={this.handleChange} />
+              <Form.Control type="date" id="inspectionDate" name="inspectionDate" value={this.state.inspectionDate} placeholder="date of Inspection : mm/dd/yyyy" 
+              isInvalid={ !!this.state.errors.inspectionDate } onChange={this.handleChange} />
+              <Form.Control.Feedback type='invalid'>
+              { this.state.errors.inspectionDate }
+              </Form.Control.Feedback>
             </Col>
             
             <Col xs="auto" className="my-1">
@@ -177,12 +230,16 @@ handleChange = event => {
                 className="mr-sm-2"
                 id="treatment"
                 name="treatment"
-                onChange={this.handleChange}
+                value={this.state.treatment}
+                onChange={this.handleChange} isInvalid={ !!this.state.errors.treatment }
                 custom
               >
                 <option value="0">Treatment...</option>
-                <option value="Girdle">Girdle</option>
+                <option value="Girdle">Girdle</option>                
               </Form.Control>
+              <Form.Control.Feedback type='invalid'>
+                  { this.state.errors.treatment }
+              </Form.Control.Feedback>
             </Col>
             
             <Col xs="auto" className="my-1">              
