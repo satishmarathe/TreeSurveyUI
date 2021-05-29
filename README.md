@@ -149,7 +149,7 @@ axios.post(baseUrl,{
                         })
         .then(data => {
 ```
-# 16 Data entry form
+## 16 Data entry form
 Data entry form  is being done via:
 https://react-bootstrap.netlify.app/components/alerts/
 
