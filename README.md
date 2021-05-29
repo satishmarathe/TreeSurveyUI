@@ -166,8 +166,7 @@ To ensure we can capture the value entered in this text box we need to add the a
 
 By doing this the 'onChange' is able to identify which element has changed and capture the change in state !
 
-#18
-Using react bootstrap to develop forms :
+## 18 Using react bootstrap to develop forms :
 https://dev.to/alecgrey/controlled-forms-with-front-and-backend-validations-using-react-bootstrap-5a2
 
 #19
